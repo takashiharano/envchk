@@ -55,7 +55,8 @@ def main():
   except Exception as e:
     content = str(e)
 
-  print('Content-Type: text/plain\n')
+  print('Content-Type: text/plain')
+  print()
   print(content)
 
 main()
