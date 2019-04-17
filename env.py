@@ -40,9 +40,15 @@ def get_env_info():
   add_info('Accept-Encoding  : ' + os.environ.get('HTTP_ACCEPT_ENCODING', 'N/A'))
   add_info('Cookie           : ' + os.environ.get('HTTP_COOKIE', 'N/A'))
   add_info('Referer          : ' + os.environ.get('HTTP_REFERER', 'N/A'))
+  add_info('Upgrade-Insecure-Requests: ' + os.environ.get('HTTP_UPGRADE_INSECURE_REQUESTS', 'N/A'))
+  add_info('Connection       : ' + os.environ.get('HTTP_CONNECTION', 'N/A'))
+  add_info('Proxy-Connection : ' + os.environ.get('HTTP_PROXY_CONNECTION', 'N/A'))
   add_info('Via              : ' + os.environ.get('HTTP_VIA', 'N/A'))
-  add_info('Proxy-Connection : ' + os.environ.get('PROXY_CONNECTION', 'N/A'))
-  add_info('stdin            : ' + sys.stdin.read())
+  add_info('X-Forwarded-For  : ' + os.environ.get('HTTP_X_FORWARDED_FOR', 'N/A'))
+  add_info('X-Forwarded-Host : ' + os.environ.get('HTTP_X_FORWARDED_HOST', 'N/A'))
+  add_info('X-Forwarded-Proto: ' + os.environ.get('HTTP_X_FORWARDED_PROTO', 'N/A'))
+  add_info('')
+  add_info('stdin: ' + sys.stdin.read())
 
 def add_info(content):
   global info
