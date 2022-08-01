@@ -1,6 +1,10 @@
 #!python
+#==============================================================================
+# envchk
+# Copyright 2019 Takashi Harano
+# Released under the MIT license
 # https://github.com/takashiharano/envchk
-
+#==============================================================================
 import os
 import sys
 import socket
@@ -9,6 +13,7 @@ import datetime
 info = ''
 
 def get_env_info():
+    global info
     now = datetime.datetime.now()
     #date_time = now.strftime('%Y-%m-%d %H:%M:%S.%f %z')
     date_time = now.strftime('%Y-%m-%d %H:%M:%S.%f') + ' +09:00'
@@ -24,7 +29,7 @@ def get_env_info():
     add_info('SERVER_PORT      : ' + os.environ.get('SERVER_PORT', ''))
     add_info('GATEWAY_INTERFACE: ' + os.environ.get('GATEWAY_INTERFACE', ''))
     add_info('SERVER_SOFTWARE  : ' + os.environ.get('SERVER_SOFTWARE', ''))
-    add_info('')
+    add_info('----------------------------------------------------------------')
     add_info('HOST ADDRESS     : ' + remote_addr)
     add_info('HOST NAME        : ' + host_name)
     add_info('REQUEST_METHOD   : ' + os.environ.get('REQUEST_METHOD', ''))
@@ -49,8 +54,9 @@ def get_env_info():
     add_info('X-Forwarded-Host : ' + os.environ.get('HTTP_X_FORWARDED_HOST', 'N/A'))
     add_info('X-Forwarded-Proto: ' + os.environ.get('HTTP_X_FORWARDED_PROTO', 'N/A'))
     add_info('Upgrade-Insecure-Requests: ' + os.environ.get('HTTP_UPGRADE_INSECURE_REQUESTS', 'N/A'))
-    add_info('')
-    add_info('stdin: ' + sys.stdin.read())
+    add_info('----------------------------------------------------------------')
+    add_info('[stdin]')
+    info += '' + sys.stdin.read()
 
 def add_info(content):
     global info
