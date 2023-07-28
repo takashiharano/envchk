@@ -208,7 +208,7 @@ def main():
     if q == 'view':
         if 'web' in sys.modules:
             context = web.on_access()
-            if context['authorized']:
+            if context.is_authorized():
                 view()
                 return
 
