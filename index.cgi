@@ -6,7 +6,7 @@
 # Released under the MIT license
 # https://github.com/takashiharano/envchk
 # Created: 20230427
-# Updated: 20230624
+# Updated: 20240121
 #==============================================================================
 
 import sys
@@ -48,6 +48,8 @@ def get_info():
     info['x_forwarded_for'] = os.environ.get('HTTP_X_FORWARDED_FOR', '')
     info['x_forwarded_host'] = os.environ.get('HTTP_X_FORWARDED_HOST', '')
     info['x_forwarded_proto'] = os.environ.get('HTTP_X_FORWARDED_PROTO', '')
+    info['sv_addr'] = os.environ.get('SERVER_ADDR', '')
+    info['sv_name'] = os.environ.get('SERVER_NAME', '')
     info['sv_protocol'] = os.environ.get('SERVER_PROTOCOL', '')
     info['upgrade_insecure_requests'] = os.environ.get('HTTP_UPGRADE_INSECURE_REQUESTS', '')
     info['cookie'] = os.environ.get('HTTP_COOKIE', '')
@@ -169,6 +171,8 @@ def build_data_string(info, for_html=False):
     s += build_field_string(info, 'X-Forwarded-For  ', 'x_forwarded_for', for_html) + '\n' 
     s += build_field_string(info, 'X-Forwarded-Host ', 'x_forwarded_host', for_html) + '\n'
     s += build_field_string(info, 'X-Forwarded-Proto', 'x_forwarded_proto', for_html) + '\n'
+    s += build_field_string(info, 'SERVER_ADDR      ', 'sv_addr', for_html) + '\n'
+    s += build_field_string(info, 'SERVER_NAME      ', 'sv_name', for_html) + '\n'
     s += build_field_string(info, 'SERVER_PROTOCOL  ', 'sv_protocol', for_html) + '\n'
     s += build_field_string(info, 'Upgrade-Insecure-Requests', 'upgrade_insecure_requests', for_html) + '\n'
     s += build_field_string(info, 'Cookie           ', 'cookie', for_html) + '\n'
