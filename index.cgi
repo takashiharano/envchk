@@ -28,6 +28,12 @@ TZ_OFFSET = util.get_tz(True)
 
 #------------------------------------------------------------------------------
 def get_info():
+    std_in = util.read_stdin()
+    try:
+        std_in = std_in.decode()
+    except:
+        std_in = util.hexdump(std_in)
+
     info = {}
     info['timestamp'] = util.get_timestamp()
     info['method'] = os.environ.get('REQUEST_METHOD', '')
@@ -56,7 +62,7 @@ def get_info():
     info['query_string'] = os.environ.get('QUERY_STRING', '')
     info['content_type'] = os.environ.get('CONTENT_TYPE', '')
     info['content_length'] = os.environ.get('CONTENT_LENGTH', '')
-    info['stdin'] = util.read_stdin()
+    info['stdin'] = '\n' + std_in
     return info
 
 #------------------------------------------------------------------------------
