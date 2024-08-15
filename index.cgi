@@ -1,12 +1,12 @@
-#!/usr/bin/python3
 #!python
+#!/usr/bin/python3
 #==============================================================================
 # envchk
 # Copyright 2023 Takashi Harano
 # Released under the MIT license
 # https://github.com/takashiharano/envchk
 # Created: 20230427
-# Updated: 20240121
+# Updated: 20240816
 #==============================================================================
 
 import sys
@@ -18,7 +18,7 @@ import util
 
 util.append_system_path(__file__, ROOT_DIR + 'websys')
 try:
-    import web
+    import websys
 except:
     pass
 
@@ -216,8 +216,8 @@ def send_result(info):
 def main():
     q = util.get_query()
     if q == 'view':
-        if 'web' in sys.modules:
-            context = web.on_access()
+        if 'websys' in sys.modules:
+            context = websys.on_access()
             if context.is_authorized():
                 view()
                 return
