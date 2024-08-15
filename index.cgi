@@ -16,7 +16,7 @@ ROOT_DIR = '../'
 sys.path.append(os.path.join(os.path.dirname(__file__), ROOT_DIR + 'libs'))
 import util
 
-util.append_system_path(__file__, ROOT_DIR + 'websys/bin')
+util.append_system_path(__file__, ROOT_DIR + 'websys')
 try:
     import web
 except:
