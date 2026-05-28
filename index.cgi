@@ -207,6 +207,70 @@ def send_result(info):
     s += build_data_string(info)
     util.send_response(s)
 
+def send_addr_screen(info):
+    remote_addr = info['addr']
+    try:
+        host_name = socket.gethostbyaddr(remote_addr)[0]
+    except Exception as e:
+        host_name = '<span style="color:#888;">(no host name)</span>'
+
+    html = '''
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="utf-8">
+    <title>Remote Address</title>
+    <style>
+    body {
+      background: #fff;
+      color: #000;
+    }
+    #wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      vertical-align: middle;
+    }
+    #wrapper {
+      position: absolute;
+      display: inline-block;
+      height: 200px;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      font-size: 24px;
+      font-family: Meiryo;
+    }
+    #ipaddr {
+      font-size: 46px;
+    }
+    #host {
+      font-size: 20px;
+    }
+    </style>
+    </head>
+    <body>
+    <div id="wrapper">
+    <div id="content">
+    '''
+    html += 'Your remote address is:<br>'
+    html += '<span id="ipaddr">' + remote_addr + '</span>'
+    html += '<br><span id="host">' + host_name + '</span>'
+
+    html += '''
+    </div>
+    </div>
+    </body>
+    </html>
+    '''
+
+    print('Content-Type: text/html');
+    print();
+    print(html, end='')
+
 #------------------------------------------------------------------------------
 # curl http://localhost/test/
 # curl -X POST -d "abc=123" http://localhost/test/
@@ -229,6 +293,8 @@ def main():
         util.send_response(info['addr'] + '\n')
     elif q == 'host':
         util.send_response(info['host'] + '\n')
+    elif q == 'addr':
+        send_addr_screen(info)
     else:
         send_result(info)
 
