@@ -1,12 +1,12 @@
-#!python
 #!/usr/bin/python3
+#!python
 #==============================================================================
 # envchk
 # Copyright 2023 Takashi Harano
 # Released under the MIT license
 # https://github.com/takashiharano/envchk
 # Created: 20230427
-# Updated: 20240816
+# Updated: 20260528
 #==============================================================================
 
 import sys
@@ -72,7 +72,7 @@ def save_log(info):
     util.append_line_to_text_file(path, dat, max=DATA_MAX_RECORDS)
 
 #------------------------------------------------------------------------------
-def view():
+def view_log():
     log_list = util.read_text_file_as_list(DATA_FILE_PATH)
     log_list.reverse()
 
@@ -215,11 +215,11 @@ def send_result(info):
 # curl -H "Cookie: sid=12345678" http://localhost/test/
 def main():
     q = util.get_query()
-    if q == 'view':
+    if q == 'log':
         if 'websys' in sys.modules:
             context = websys.on_access()
             if context.is_authorized():
-                view()
+                view_log()
                 return
 
     info = get_info()
@@ -227,7 +227,7 @@ def main():
 
     if q == 'ip':
         util.send_response(info['addr'] + '\n')
-    if q == 'host':
+    elif q == 'host':
         util.send_response(info['host'] + '\n')
     else:
         send_result(info)
