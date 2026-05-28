@@ -208,10 +208,8 @@ def send_result(info):
     util.send_response(s)
 
 def send_addr_screen(info):
-    remote_addr = info['addr']
-    try:
-        host_name = socket.gethostbyaddr(remote_addr)[0]
-    except Exception as e:
+    host_name = info['host']
+    if host_name == '':
         host_name = '<span style="color:#888;">(no host name)</span>'
 
     html = '''
@@ -257,7 +255,7 @@ def send_addr_screen(info):
     <div id="content">
     '''
     html += 'Your remote address is:<br>'
-    html += '<span id="ipaddr">' + remote_addr + '</span>'
+    html += '<span id="ipaddr">' + info['addr'] + '</span>'
     html += '<br><span id="host">' + host_name + '</span>'
 
     html += '''
