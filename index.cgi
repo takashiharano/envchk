@@ -3,10 +3,10 @@
 #==============================================================================
 # envchk
 # Copyright 2023 Takashi Harano
-# Released under the MIT license
+# Released under the MIT License
 # https://github.com/takashiharano/envchk
 # Created: 20230427
-# Updated: 20260528
+# Updated: 20260806
 #==============================================================================
 
 import sys
